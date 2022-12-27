@@ -17,11 +17,14 @@ func pingHandler(c *gin.Context) {
 }
 
 func indexHandler(c *gin.Context) {
-	rend(c.Writer, "index")
+	c.HTML(http.StatusOK, "index.html", nil)
+
 }
 
 func Start() error {
 	r := gin.Default()
+
+	r.LoadHTMLGlob("web/*")
 
 	r.GET("/ping", pingHandler)
 	r.GET("/", indexHandler)
